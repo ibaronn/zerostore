@@ -27,6 +27,10 @@ FIX_MOJI_REPORT.txt
 # internal scripting scratch
 scripts/
 
+# CLI context (local only)
+.neon/
+.vercel/
+
 .DS_Store
 # separate remotion scratch project (not part of the app)
 video/
