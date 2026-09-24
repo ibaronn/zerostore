@@ -4,12 +4,14 @@ import Link from "next/link";
 import { BadgeCheck, MapPin } from "lucide-react";
 import { money } from "@/lib/format";
 import { firstImage } from "@/lib/images";
+import { CATEGORIES } from "@/lib/categories";
 
 export type MarqueeListing = {
   id: string;
   title: string;
   price: number;
   negotiable: boolean;
+  category: string;
   city: string;
   images: string[];
   user: { name: string; storeName: string | null; avatar: string | null };
@@ -51,6 +53,7 @@ export default function AdMarquee({
         <div className={`flex w-max gap-4 whitespace-nowrap ${fast ? "animate-marquee-fast" : "animate-marquee"}`}>
           {doubled.map((l, i) => {
             const img = firstImage(l.images);
+            const cat = CATEGORIES.find((c) => c.slug === l.category);
             return (
               <Link
                 key={`${l.id}-${i}`}
@@ -70,6 +73,14 @@ export default function AdMarquee({
                   ) : (
                     <span className="grid h-full w-full place-items-center bg-gradient-to-br from-brand-600 to-brand-800 text-lg font-black text-white">
                       ZERO STORE
+                    </span>
+                  )}
+                  {cat && (
+                    <span
+                      className={`absolute bottom-2 start-2 grid h-9 w-9 place-items-center rounded-xl bg-white/95 text-lg shadow-sm backdrop-blur transition duration-300 group-hover:-rotate-6 group-hover:scale-110`}
+                      aria-hidden
+                    >
+                      {cat.emoji}
                     </span>
                   )}
                   {l.negotiable && (

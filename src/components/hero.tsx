@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ShoppingBag, MessageCircle, Phone, Wallet, Users, ShieldCheck, BadgeCheck } from "lucide-react";
 import HomeSearch from "@/components/home-search";
+import HeroScene from "@/components/hero-scene";
 
 type HeroItem = {
   id: string;
@@ -31,6 +32,22 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5] text-slate-900">
+      <video
+        src="/video/zero-promo.mp4"
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        aria-hidden
+        className="absolute inset-0 hidden h-full w-full object-cover opacity-[0.16] blur-[2px] lg:block"
+      />
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <div className="animate-aurora absolute -start-16 top-6 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl" />
+        <div className="animate-aurora-slow absolute -end-24 top-1/3 h-[26rem] w-[26rem] rounded-full bg-teal-300/30 blur-3xl" />
+        <div className="animate-aurora absolute bottom-0 start-1/3 h-64 w-64 rounded-full bg-amber-200/50 blur-3xl" />
+      </div>
+      <HeroScene />
       <motion.div
         style={{ y: orbsY }}
         className="pointer-events-none absolute -top-24 start-[8%] h-80 w-80 rounded-full bg-brand-200/40 blur-3xl"

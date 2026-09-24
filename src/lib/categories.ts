@@ -20,23 +20,24 @@ export type Category = {
   slug: string;
   name: string;
   icon: LucideIcon;
+  emoji: string;
   gradient: string;
 };
 
 export const CATEGORIES: Category[] = [
-  { slug: "electronics", name: "الكترونيات", icon: Laptop, gradient: "from-violet-600 to-indigo-600" },
-  { slug: "phones", name: "موبايلات وجوالات", icon: Smartphone, gradient: "from-fuchsia-600 to-pink-600" },
-  { slug: "home-appliances", name: "أجهزة منزلية", icon: Tv, gradient: "from-cyan-600 to-sky-600" },
-  { slug: "furniture", name: "أثاث ومنزل", icon: Sofa, gradient: "from-amber-500 to-orange-600" },
-  { slug: "vehicles", name: "سيارات ومركبات", icon: Car, gradient: "from-blue-600 to-indigo-600" },
-  { slug: "real-estate", name: "عقارات", icon: Building2, gradient: "from-emerald-600 to-teal-600" },
-  { slug: "fashion", name: "ملابس وموضة", icon: Shirt, gradient: "from-pink-600 to-rose-600" },
-  { slug: "gaming", name: "ألعاب وترفيه", icon: Gamepad2, gradient: "from-purple-600 to-violet-600" },
-  { slug: "sports", name: "رياضة", icon: Dumbbell, gradient: "from-lime-600 to-green-600" },
-  { slug: "pets", name: "حيوانات أليفة", icon: PawPrint, gradient: "from-orange-500 to-amber-600" },
-  { slug: "services", name: "وظائف وخدمات", icon: Briefcase, gradient: "from-slate-700 to-slate-900" },
-  { slug: "books", name: "كتب وقرطاسية", icon: BookOpen, gradient: "from-yellow-500 to-amber-600" },
-  { slug: "other", name: "أخرى", icon: Sparkles, gradient: "from-rose-500 to-fuchsia-600" },
+  { slug: "electronics", name: "الكترونيات", icon: Laptop, emoji: "💻", gradient: "from-violet-600 to-indigo-600" },
+  { slug: "phones", name: "موبايلات وجوالات", icon: Smartphone, emoji: "📱", gradient: "from-fuchsia-600 to-pink-600" },
+  { slug: "home-appliances", name: "أجهزة منزلية", icon: Tv, emoji: "📺", gradient: "from-cyan-600 to-sky-600" },
+  { slug: "furniture", name: "أثاث ومنزل", icon: Sofa, emoji: "🛋️", gradient: "from-amber-500 to-orange-600" },
+  { slug: "vehicles", name: "سيارات ومركبات", icon: Car, emoji: "🚗", gradient: "from-blue-600 to-indigo-600" },
+  { slug: "real-estate", name: "عقارات", icon: Building2, emoji: "🏠", gradient: "from-emerald-600 to-teal-600" },
+  { slug: "fashion", name: "ملابس وموضة", icon: Shirt, emoji: "👕", gradient: "from-pink-600 to-rose-600" },
+  { slug: "gaming", name: "ألعاب وترفيه", icon: Gamepad2, emoji: "🎮", gradient: "from-purple-600 to-violet-600" },
+  { slug: "sports", name: "رياضة", icon: Dumbbell, emoji: "🏋️", gradient: "from-lime-600 to-green-600" },
+  { slug: "pets", name: "حيوانات أليفة", icon: PawPrint, emoji: "🐾", gradient: "from-orange-500 to-amber-600" },
+  { slug: "services", name: "وظائف وخدمات", icon: Briefcase, emoji: "💼", gradient: "from-slate-700 to-slate-900" },
+  { slug: "books", name: "كتب وقرطاسية", icon: BookOpen, emoji: "📚", gradient: "from-yellow-500 to-amber-600" },
+  { slug: "other", name: "أخرى", icon: Sparkles, emoji: "✨", gradient: "from-rose-500 to-fuchsia-600" },
 ];
 
 export function categoryBySlug(slug: string) {

@@ -163,6 +163,26 @@ body {
     animation: marquee 28s linear infinite;
   }
 
+  .animate-floaty {
+    animation: floaty 5s ease-in-out infinite;
+  }
+
+  .animate-floaty-slow {
+    animation: floaty 7s ease-in-out infinite;
+  }
+
+  .animate-pulse-glow {
+    animation: pulseGlow 4s ease-in-out infinite;
+  }
+
+  .animate-aurora {
+    animation: aurora 18s ease-in-out infinite;
+  }
+
+  .animate-aurora-slow {
+    animation: aurora 26s ease-in-out infinite;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .animate-marquee,
     .animate-marquee-fast {
@@ -171,7 +191,9 @@ body {
 
     .animate-floaty,
     .animate-floaty-slow,
-    .animate-pulse-glow {
+    .animate-pulse-glow,
+    .animate-aurora,
+    .animate-aurora-slow {
       animation: none;
     }
   }
@@ -200,6 +222,13 @@ body {
 @keyframes pulseGlow {
   0%, 100% { opacity: 0.5; transform: scale(1); }
   50% { opacity: 0.8; transform: scale(1.05); }
+}
+
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(9%, -7%) scale(1.15); }
+  50% { transform: translate(-7%, 6%) scale(1.05); }
+  75% { transform: translate(-5%, -9%) scale(1.18); }
 }
 
 ::-webkit-scrollbar {

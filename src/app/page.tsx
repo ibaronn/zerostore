@@ -78,6 +78,7 @@ function toMarquee(l: {
   title: string;
   price: number;
   negotiable: boolean;
+  category: string;
   city: string;
   images: string;
   user: { id: string; name: string; avatar: string | null; storeName: string | null };
@@ -87,6 +88,7 @@ function toMarquee(l: {
     title: l.title,
     price: l.price,
     negotiable: l.negotiable,
+    category: l.category,
     city: l.city,
     images: imageList(l.images),
     user: l.user,
@@ -210,12 +212,13 @@ function SectionHead({
         <div className="flex items-center gap-2 text-brand-600">{icon}</div>
         <h2 className="font-cairo mt-2 text-2xl font-black text-slate-900 sm:text-3xl">{title}</h2>
         <p className="mt-1 text-sm font-bold text-slate-500">{sub}</p>
+        <span className="mt-3 block h-1 w-14 rounded-full bg-gradient-to-r from-brand-500 via-teal-400 to-emerald-400" />
       </div>
       <Link
         href={href}
-        className="hidden shrink-0 items-center gap-1 rounded-xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 transition hover:bg-brand-600 hover:text-white sm:flex"
+        className="group hidden shrink-0 items-center gap-1 rounded-xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 transition hover:bg-brand-600 hover:text-white sm:flex"
       >
-        عرض الكل <ChevronLeft className="h-4 w-4" />
+        عرض الكل <ChevronLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
       </Link>
     </div>
   );
@@ -265,7 +268,7 @@ function HowItWorks() {
         {STEPS.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.06}>
             <div className="group relative h-full overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-900/5">
-              <span className="font-cairo absolute -left-2 -top-4 text-8xl font-black text-slate-100 transition group-hover:text-brand-50">
+              <span className="font-cairo bg-gradient-to-br from-brand-200 via-teal-200 to-amber-100 bg-clip-text absolute -left-2 -top-4 text-8xl font-black text-transparent transition duration-300 group-hover:from-brand-300 group-hover:to-emerald-200">
                 {i + 1}
               </span>
               <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-700 text-white shadow-sm">

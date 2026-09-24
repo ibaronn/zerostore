@@ -42,14 +42,13 @@ export default function HomeSearch() {
         {QUICK.map((slug) => {
           const c = CATEGORIES.find((x) => x.slug === slug);
           if (!c) return null;
-          const Icon = c.icon;
           return (
             <a
               key={slug}
               href={`/listings?category=${c.slug}`}
               className="flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-1.5 text-xs font-bold text-slate-600 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-300 hover:text-brand-700"
             >
-              <Icon className="h-3.5 w-3.5" />
+              <span className="text-base leading-none" aria-hidden>{c.emoji}</span>
               {c.name}
             </a>
           );

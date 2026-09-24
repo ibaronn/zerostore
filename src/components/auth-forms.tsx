@@ -16,7 +16,7 @@ import {
   ArrowLeft,
   CheckCheck,
 } from "lucide-react";
-import { normalizeLibyanPhone, VALID_PHONE } from "@/lib/phone";
+import { normalizeLibyanPhone, toLocalPhoneDigits, VALID_PHONE } from "@/lib/phone";
 
 const inputCls =
   "w-full rounded-2xl border border-slate-200 bg-slate-50/50 py-3.5 pe-4 ps-11 text-sm font-bold outline-none transition focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20";
@@ -182,6 +182,7 @@ export function RegisterForm() {
   const next = sp.get("next") || "/";
 
   const [step, setStep] = useState<"phone" | "code" | "details">("phone");
+  const [rawPhone, setRawPhone] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -197,9 +198,9 @@ export function RegisterForm() {
 
   const sendCode = async () => {
     setError("");
-    const normalized = normalizeLibyanPhone(phone);
+    const normalized = normalizeLibyanPhone(rawPhone);
     if (!VALID_PHONE.test(normalized)) {
-      setError("أدخل رقماً ليبيّاً صحيحاً يبدأ بـ 9 ويتكوّن من 10 أرقام (مثال: +218 91 234 5678)");
+      setError("أدخل رقماً ليبيّاً صحيحاً: يبدأ بـ 09 ثم 8 أرقام (مثال: 0912345678)");
       return;
     }
     setPhone(normalized);
@@ -304,15 +305,40 @@ export function RegisterForm() {
           </div>
           <h3 className="font-cairo text-lg font-black text-slate-900">بداية موثوقة برقمك الليبي</h3>
           <p className="text-sm font-bold leading-7 text-slate-500">
-            سنرسل رمزاً من 6 أرقام إلى واتساب رقمك +218 للتأكد أنك صاحب المتجر. مالياً ومجاني 100%.
+            سنرسل رمزاً من 6 أرقام إلى واتساب رقمك للتأكد أنك صاحب المتجر. مجاني 100% ورمز الدولة +218 يُضاف تلقائياً.
           </p>
-          <Field
-            icon={<Phone className="h-4 w-4" />}
-            dir="ltr"
-            placeholder="+218 91 234 5678"
-            value={phone}
-            onChange={(e) => setPhone(e.target.value)}
-          />
+          <div className="flex items-stretch gap-2">
+            <span
+              dir="ltr"
+              className="flex shrink-0 items-center gap-1.5 rounded-2xl border border-slate-200 bg-slate-100 px-3.5 py-3.5 text-sm font-black text-slate-700"
+            >
+              🇱🇾 +218
+            </span>
+            <div className="relative min-w-0 flex-1">
+              <input
+                dir="ltr"
+                inputMode="tel"
+                autoComplete="tel-national"
+                placeholder="09 123 456 78"
+                value={rawPhone}
+                onChange={(e) => setRawPhone(toLocalPhoneDigits(e.target.value))}
+                className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 py-3.5 pe-12 ps-4 text-sm font-bold outline-none transition focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20"
+              />
+              {rawPhone && (
+                <span className="absolute end-9 top-1/2 -translate-y-1/2">
+                  {VALID_PHONE.test(normalizeLibyanPhone(rawPhone)) ? (
+                    <CheckCheck className="h-5 w-5 text-emerald-500" />
+                  ) : (
+                    <span className="text-xs font-bold text-slate-300">{10 - rawPhone.length} أرقام متبقية</span>
+                  )}
+                </span>
+              )}
+            </div>
+          </div>
+          <p className="flex items-center gap-1.5 rounded-xl bg-slate-50 px-3 py-2 text-[11px] font-bold leading-5 text-slate-400">
+            <ShieldCheck className="h-3.5 w-3.5 shrink-0 text-brand-500" />
+            اكتب رقمك بالصيغة المختصرة 09… وسيُحفظ في متجرك بالصيغة الدولية <span dir="ltr">+218…</span> دون أن تكتبه
+          </p>
           <button
             type="submit"
             disabled={loading}

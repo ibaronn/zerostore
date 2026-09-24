@@ -136,8 +136,8 @@ export default function ListingCard({
 
         <div className="flex flex-1 flex-col gap-2 p-4">
           <div className="flex items-center justify-between gap-2">
-            <span className="rounded-full bg-brand-50 px-2.5 py-1 text-[11px] font-bold text-brand-700">
-              {cat?.name ?? "أخرى"}
+            <span className={`rounded-full bg-gradient-to-br ${cat?.gradient ?? "from-slate-600 to-slate-800"} px-2.5 py-1 text-[11px] font-black text-white`}>
+              {cat?.emoji ?? "✨"} {cat?.name ?? "أخرى"}
             </span>
             <span className="flex items-center gap-1 text-xs font-bold text-slate-400">
               <Eye className="h-3.5 w-3.5" />
