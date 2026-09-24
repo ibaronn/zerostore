@@ -319,7 +319,7 @@ export function RegisterForm() {
                 dir="ltr"
                 inputMode="tel"
                 autoComplete="tel-national"
-                placeholder="09 123 456 78"
+                placeholder="09X XXXXXXX"
                 value={rawPhone}
                 onChange={(e) => setRawPhone(toLocalPhoneDigits(e.target.value))}
                 className="w-full rounded-2xl border border-slate-200 bg-slate-50/50 py-3.5 pe-12 ps-4 text-sm font-bold outline-none transition focus:border-brand-500 focus:bg-white focus:ring-2 focus:ring-brand-500/20"

@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ShoppingBag, MessageCircle, Phone, Wallet, Users, ShieldCheck, BadgeCheck } from "lucide-react";
 import HomeSearch from "@/components/home-search";
@@ -32,17 +33,17 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5] text-slate-900">
-      <video
-        src="/video/zero-promo.mp4"
-        autoPlay
-        loop
-        muted
-        playsInline
-        preload="metadata"
-        aria-hidden
-        className="absolute inset-0 hidden h-full w-full object-cover opacity-[0.16] blur-[2px] lg:block"
-      />
       <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+        <video
+          src="/video/zero-promo.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="h-full w-full object-cover opacity-60"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-50/80 via-brand-50/40 to-brand-50/90" />
         <div className="animate-aurora absolute -start-16 top-6 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl" />
         <div className="animate-aurora-slow absolute -end-24 top-1/3 h-[26rem] w-[26rem] rounded-full bg-teal-300/30 blur-3xl" />
         <div className="animate-aurora absolute bottom-0 start-1/3 h-64 w-64 rounded-full bg-amber-200/50 blur-3xl" />
@@ -82,6 +83,31 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
             <MiniStat icon={<MessageCircle className="h-5 w-5 text-brand-600" />} value="دردشة" label="تفاوض فوري" />
             <MiniStat icon={<Phone className="h-5 w-5 text-brand-700" />} value="+218" label="رقمك في متجرك" />
           </div>
+
+          {showcase.some((s) => s.images[0]) && (
+            <div className="mt-8 flex gap-3 overflow-x-auto pb-1 lg:hidden [scrollbar-width:none]">
+              {showcase.map(
+                (s) =>
+                  s.images[0] && (
+                    <Link
+                      key={s.id}
+                      href={`/listings/${s.id}`}
+                      className="group relative shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-md"
+                    >
+                      <img
+                        src={s.images[0]}
+                        alt=""
+                        loading="lazy"
+                        className="h-28 w-24 object-cover transition duration-300 group-hover:scale-105"
+                      />
+                      <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-ink/75 px-1.5 py-0.5 font-cairo text-xs font-black text-white backdrop-blur">
+                        {formatNum(s.price)} د.ل
+                      </span>
+                    </Link>
+                  )
+              )}
+            </div>
+          )}
         </motion.div>
 
         <motion.div style={{ y: gridY, rotate: gridRotate }} className="relative mx-auto hidden w-full max-w-lg lg:block">
