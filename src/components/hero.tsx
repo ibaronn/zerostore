@@ -21,7 +21,6 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
 
   const titleY = useTransform(progress, [0, 1], [0, reduced ? 0 : 110]);
   const titleOpacity = useTransform(progress, [0, 0.65], [1, 0]);
-  const orbsY = useTransform(progress, [0, 1], [0, reduced ? 0 : -150]);
   const gridY = useTransform(progress, [0, 1], [0, reduced ? 0 : -70]);
   const gridRotate = useTransform(progress, [0, 1], [0, reduced ? 0 : 4]);
 
@@ -33,7 +32,7 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
 
   return (
     <section ref={ref} className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5] text-slate-900">
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden">
+      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#F4F6F5]">
         <video
           src="/video/zero-promo.mp4"
           autoPlay
@@ -41,22 +40,15 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
           muted
           playsInline
           preload="auto"
-          className="h-full w-full object-cover opacity-60"
+          style={{ opacity: reduced ? 0.28 : 0.55 }}
+          className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-50/80 via-brand-50/40 to-brand-50/90" />
-        <div className="animate-aurora absolute -start-16 top-6 h-80 w-80 rounded-full bg-brand-300/40 blur-3xl" />
-        <div className="animate-aurora-slow absolute -end-24 top-1/3 h-[26rem] w-[26rem] rounded-full bg-teal-300/30 blur-3xl" />
-        <div className="animate-aurora absolute bottom-0 start-1/3 h-64 w-64 rounded-full bg-amber-200/50 blur-3xl" />
+        <div className="absolute inset-0 bg-gradient-to-br from-brand-700/10 via-white/5 to-teal-500/10" />
+        <div className="absolute inset-y-0 start-0 hidden w-full bg-gradient-to-l from-white/90 via-white/55 to-transparent lg:block lg:w-[58%]" />
+        <div className="absolute inset-x-0 top-0 h-2/3 bg-gradient-to-b from-white/75 via-white/25 to-transparent lg:hidden" />
+        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f4f6f5] to-transparent" />
       </div>
       <HeroScene />
-      <motion.div
-        style={{ y: orbsY }}
-        className="pointer-events-none absolute -top-24 start-[8%] h-80 w-80 rounded-full bg-brand-200/40 blur-3xl"
-      />
-      <motion.div
-        style={{ y: orbsY }}
-        className="pointer-events-none absolute -bottom-24 end-[4%] h-72 w-72 rounded-full bg-teal-300/30 blur-3xl"
-      />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 lg:grid-cols-2 lg:pb-20 lg:pt-16">
         <motion.div style={{ y: titleY, opacity: titleOpacity }} className="text-center lg:text-start">
@@ -92,13 +84,13 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
                     <Link
                       key={s.id}
                       href={`/listings/${s.id}`}
-                      className="group relative shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-md"
+                      className="group relative shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-md ring-1 ring-black/5"
                     >
                       <img
                         src={s.images[0]}
                         alt=""
                         loading="lazy"
-                        className="h-28 w-24 object-cover transition duration-300 group-hover:scale-105"
+                        className="aspect-[4/5] w-24 object-cover transition duration-300 group-hover:scale-105"
                       />
                       <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-ink/75 px-1.5 py-0.5 font-cairo text-xs font-black text-white backdrop-blur">
                         {formatNum(s.price)} د.ل
@@ -161,7 +153,7 @@ function ShowcaseTile({
   price?: number;
 }) {
   return (
-    <div className={`group relative overflow-hidden ${className} border border-white/60 bg-white shadow-xl shadow-brand-900/10`}>
+    <div className={`group relative overflow-hidden ${className} border border-white/60 bg-white shadow-xl shadow-brand-900/10 ring-1 ring-black/5`}>
       {src ? (
         <img
           src={src}
