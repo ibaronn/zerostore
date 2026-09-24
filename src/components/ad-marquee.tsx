@@ -35,15 +35,12 @@ export default function AdMarquee({
     <section className="relative overflow-hidden border-y border-slate-200/70 bg-slate-50/60 py-8">
       <div className="mx-auto mb-6 flex max-w-7xl items-end justify-between gap-4 px-4 lg:px-6">
         <div>
-          <p className="flex items-center gap-2 text-xs font-black uppercase tracking-widest text-brand-600">
-            <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-brand-500 opacity-60" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-brand-500" />
-            </span>
+          <p className="flex items-center gap-2 text-xs font-bold text-slate-500">
+            <span className="h-1.5 w-1.5 rounded-full bg-brand-600" />
             الأكثر رواجاً
           </p>
-          <h2 className="font-cairo mt-2 text-2xl font-black text-slate-900 sm:text-3xl">{title}</h2>
-          <p className="mt-1 text-sm font-bold text-slate-500">{sub}</p>
+          <h2 className="font-cairo mt-1.5 text-2xl font-extrabold text-slate-900 sm:text-3xl">{title}</h2>
+          <p className="mt-1 text-sm font-medium text-slate-500">{sub}</p>
         </div>
       </div>
 
@@ -59,7 +56,7 @@ export default function AdMarquee({
                 key={`${l.id}-${i}`}
                 href={`/listings/${l.id}`}
                 dir="rtl"
-                className="group w-64 shrink-0 select-none overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-900/10"
+                className="group w-64 shrink-0 select-none overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:border-brand-200 hover:shadow-md hover:shadow-brand-900/5"
               >
                 <div className="relative h-32 overflow-hidden">
                   {img ? (
@@ -71,33 +68,33 @@ export default function AdMarquee({
                       className="h-full w-full object-cover transition duration-500 group-hover:scale-110"
                     />
                   ) : (
-                    <span className="grid h-full w-full place-items-center bg-gradient-to-br from-brand-600 to-brand-800 text-lg font-black text-white">
+                    <span className="grid h-full w-full place-items-center bg-slate-200 text-sm font-bold text-slate-400">
                       ZERO STORE
                     </span>
                   )}
                   {cat && (
                     <span
-                      className={`absolute bottom-2 start-2 grid h-9 w-9 place-items-center rounded-xl bg-white/95 text-lg shadow-sm backdrop-blur transition duration-300 group-hover:-rotate-6 group-hover:scale-110`}
+                      className="absolute bottom-2 start-2 grid h-8 w-8 place-items-center rounded-lg border border-white/60 bg-white/95 text-base shadow-sm"
                       aria-hidden
                     >
                       {cat.emoji}
                     </span>
                   )}
                   {l.negotiable && (
-                    <span className="absolute bottom-2 end-2 flex items-center gap-1 rounded-full bg-emerald-500/95 px-2.5 py-1 text-[10px] font-black text-white backdrop-blur">
+                    <span className="absolute bottom-2 end-2 flex items-center gap-1 rounded-full bg-emerald-600 px-2.5 py-1 text-[10px] font-bold text-white shadow-sm">
                       <BadgeCheck className="h-3 w-3" /> تفاوض
                     </span>
                   )}
                 </div>
                 <div className="space-y-2 p-3 text-start">
-                  <p className="line-clamp-1 text-sm font-extrabold text-slate-800">{l.title}</p>
+                  <p className="line-clamp-1 text-sm font-bold text-slate-800">{l.title}</p>
                   <div className="flex items-center justify-between">
-                    <p className="font-cairo text-base font-black text-slate-900">{money(l.price)}</p>
-                    <span className="flex items-center gap-1 text-[11px] font-bold text-slate-400">
+                    <p className="font-cairo text-base font-extrabold text-slate-900">{money(l.price)}</p>
+                    <span className="flex items-center gap-1 text-[11px] font-semibold text-slate-400">
                       <MapPin className="h-3 w-3" /> {l.city}
                     </span>
                   </div>
-                  <p className="truncate text-[11px] font-bold text-slate-400">
+                  <p className="truncate text-[11px] font-semibold text-slate-400">
                     {l.user.storeName || l.user.name}
                   </p>
                 </div>

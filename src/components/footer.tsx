@@ -38,7 +38,7 @@ export default function Footer() {
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-700">
+              <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-600">
                 <ShoppingBag className="h-5 w-5 text-white" />
               </span>
               <span className="font-cairo text-2xl font-black">

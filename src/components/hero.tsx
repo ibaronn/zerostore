@@ -5,7 +5,6 @@ import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 import { ShoppingBag, MessageCircle, Phone, Wallet, Users, ShieldCheck, BadgeCheck } from "lucide-react";
 import HomeSearch from "@/components/home-search";
-import HeroScene from "@/components/hero-scene";
 
 type HeroItem = {
   id: string;
@@ -31,24 +30,12 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
   ];
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5] text-slate-900">
-      <div aria-hidden className="pointer-events-none absolute inset-0 z-0 overflow-hidden bg-[#F4F6F5]">
-        <video
-          src="/video/zero-promo.mp4"
-          autoPlay
-          loop
-          muted
-          playsInline
-          preload="auto"
-          style={{ opacity: reduced ? 0.28 : 0.55 }}
-          className="h-full w-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-brand-700/10 via-white/5 to-teal-500/10" />
-        <div className="absolute inset-y-0 start-0 hidden w-full bg-gradient-to-l from-white/90 via-white/55 to-transparent lg:block lg:w-[58%]" />
-        <div className="absolute inset-x-0 top-0 h-2/3 bg-gradient-to-b from-white/75 via-white/25 to-transparent lg:hidden" />
-        <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#f4f6f5] to-transparent" />
+    <section ref={ref} className="relative overflow-hidden bg-white text-slate-900">
+      <div aria-hidden className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5]" />
+        <div className="absolute -end-28 -top-28 h-[26rem] w-[26rem] rounded-full bg-brand-100/60 blur-3xl" />
+        <div className="absolute -start-32 bottom-0 h-80 w-80 rounded-full bg-teal-100/50 blur-3xl" />
       </div>
-      <HeroScene />
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 lg:grid-cols-2 lg:pb-20 lg:pt-16">
         <motion.div style={{ y: titleY, opacity: titleOpacity }} className="text-center lg:text-start">
@@ -61,7 +48,7 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
             اعرض منتجك، <span className="text-gradient">تفاوض</span> واربح أسرع
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-8 text-slate-500 sm:text-lg lg:mx-0">
+          <p className="mx-auto mt-4 max-w-xl text-base font-medium leading-8 text-slate-500 sm:text-lg lg:mx-0">
             زيرو ستور يمنحك متجراً رقمياً من قلب ليبيا — اعرض منتجك من أي مدينة،
             سعّر بالدينار الليبي، وتفاوض مع المشترين عبر دردشة فورية.
           </p>
@@ -84,7 +71,7 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
                     <Link
                       key={s.id}
                       href={`/listings/${s.id}`}
-                      className="group relative shrink-0 overflow-hidden rounded-2xl border border-white/70 bg-white shadow-md ring-1 ring-black/5"
+                      className="group relative shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm ring-1 ring-black/5"
                     >
                       <img
                         src={s.images[0]}
@@ -92,7 +79,7 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
                         loading="lazy"
                         className="aspect-[4/5] w-24 object-cover transition duration-300 group-hover:scale-105"
                       />
-                      <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-ink/75 px-1.5 py-0.5 font-cairo text-xs font-black text-white backdrop-blur">
+                      <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-slate-900/70 px-1.5 py-0.5 font-cairo text-xs font-bold text-white backdrop-blur">
                         {formatNum(s.price)} د.ل
                       </span>
                     </Link>
@@ -110,12 +97,12 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
             className="grid grid-cols-2 gap-4"
           >
             <div className="space-y-4 pt-10">
-              <ShowcaseTile src={a} className="aspect-[4/5] rounded-3xl" price={showcase[0]?.price} />
-              {c && <ShowcaseTile src={c} className="aspect-[4/3] rounded-3xl" price={showcase[2]?.price} />}
+              <ShowcaseTile src={a} className="aspect-[4/5] rounded-2xl" price={showcase[0]?.price} />
+              {c && <ShowcaseTile src={c} className="aspect-[4/3] rounded-2xl" price={showcase[2]?.price} />}
             </div>
             <div className="mt-6 space-y-4">
-              <ShowcaseTile src={b} className="aspect-[3/4] rounded-3xl" price={showcase[1]?.price} />
-              <div className="flex items-center gap-3 rounded-2xl border border-brand-100 bg-white/90 px-4 py-3 shadow-lg shadow-brand-900/5">
+              <ShowcaseTile src={b} className="aspect-[3/4] rounded-2xl" price={showcase[1]?.price} />
+              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
                 <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
                   <Users className="h-5 w-5" />
                 </span>
@@ -126,13 +113,24 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
                   <p className="text-xs font-bold text-slate-500">من كل المدن الليبية</p>
                 </div>
               </div>
-              <div className="flex items-center gap-3 rounded-2xl border border-emerald-100 bg-white/90 px-4 py-3 shadow-lg shadow-brand-900/5">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
+              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700">
+                  <Users className="h-5 w-5" />
+                </span>
+                <div>
+                  <p className="font-cairo text-sm font-extrabold text-slate-900">
+                    {count}+ إعلان نشط في السوق
+                  </p>
+                  <p className="text-xs font-medium text-slate-500">من كل المدن الليبية</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
+                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
                   <ShieldCheck className="h-5 w-5" />
                 </span>
                 <div>
-                  <p className="font-cairo text-sm font-black text-slate-900">بائع معتمد</p>
-                  <p className="text-xs font-bold text-slate-500">رقم هاتف +218 في المتجر</p>
+                  <p className="font-cairo text-sm font-extrabold text-slate-900">بائع معتمد</p>
+                  <p className="text-xs font-medium text-slate-500">رقم هاتف +218 في المتجر</p>
                 </div>
               </div>
             </div>
@@ -168,7 +166,7 @@ function ShowcaseTile({
       )}
       <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
       {price !== undefined && (
-        <span className="absolute bottom-3 start-3 rounded-xl bg-ink/70 px-3 py-1.5 font-cairo text-sm font-black text-white backdrop-blur">
+        <span className="absolute bottom-3 start-3 rounded-xl bg-slate-900/70 px-3 py-1.5 font-cairo text-sm font-extrabold text-white backdrop-blur">
           {formatNum(price)} د.ل
         </span>
       )}
@@ -180,8 +178,8 @@ function MiniStat({ icon, value, label }: { icon: React.ReactNode; value: string
   return (
     <div className="flex flex-col items-center gap-1 lg:items-start">
       {icon}
-      <p className="font-cairo text-lg font-black text-slate-900">{value}</p>
-      <p className="text-[11px] font-bold text-slate-500">{label}</p>
+      <p className="font-cairo text-lg font-extrabold text-slate-900">{value}</p>
+      <p className="text-[11px] font-semibold text-slate-500">{label}</p>
     </div>
   );
 }

@@ -9,17 +9,16 @@ export default function CategoriesGrid() {
           <Link
             key={c.slug}
             href={`/listings?category=${c.slug}`}
-            className="group flex shrink-0 flex-col items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white px-2 py-4 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg hover:shadow-brand-900/10"
+            className="group flex shrink-0 flex-col items-center gap-2 rounded-xl border border-slate-200 bg-white px-2 py-4 text-center transition duration-200 hover:border-brand-300 hover:bg-brand-50/40 hover:shadow-sm"
           >
             <span
-              className={`relative grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${c.gradient} text-2xl leading-none shadow-sm transition duration-300 group-hover:-rotate-6 group-hover:scale-110 group-hover:shadow-md`}
+              className={`grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br ${c.gradient} text-2xl leading-none shadow-sm`}
             >
-              <span className="drop-shadow-sm" aria-hidden>{c.emoji}</span>
+              <span aria-hidden>{c.emoji}</span>
             </span>
-            <span className="text-xs font-extrabold leading-4 text-slate-700 transition group-hover:text-brand-700">
+            <span className="text-xs font-semibold leading-4 text-slate-700 transition group-hover:text-brand-700">
               {c.name}
             </span>
-            <span className="h-1 w-6 origin-center scale-x-[0.35] rounded-full bg-brand-500/60 transition-transform duration-300 group-hover:scale-x-100 group-hover:bg-brand-600" />
           </Link>
         );
       })}

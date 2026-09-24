@@ -97,7 +97,7 @@ export default function Navbar() {
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center gap-3 px-4 lg:px-6">
         <Link href="/" className="flex shrink-0 items-center gap-2">
-          <span className="grid h-10 w-10 place-items-center rounded-xl bg-gradient-to-br from-brand-600 to-brand-700 text-white shadow-sm">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-600 text-white shadow-sm">
             <ShoppingBag className="h-5 w-5" />
           </span>
           <span className="font-cairo text-xl font-black tracking-tight text-slate-900">
@@ -138,7 +138,7 @@ export default function Navbar() {
                 onClick={() => setOpen((v) => !v)}
                 className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white py-1.5 pe-3 ps-1.5 shadow-sm transition hover:border-brand-300"
               >
-                <span className="grid h-8 w-8 place-items-center overflow-hidden rounded-lg bg-gradient-to-br from-brand-500 to-brand-700 text-xs font-bold text-white">
+                <span className="grid h-8 w-8 place-items-center overflow-hidden rounded-lg bg-brand-600 text-xs font-bold text-white">
                   {user.avatar ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img src={user.avatar} alt="" className="h-full w-full object-cover" />

@@ -21,7 +21,7 @@ export default function HomeSearch() {
     <div>
       <form
         onSubmit={submit}
-        className="mx-auto flex max-w-2xl items-center gap-2 rounded-2xl border border-slate-200 bg-white p-2 shadow-lg shadow-brand-900/10 transition focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/15 lg:mx-0"
+        className="mx-auto flex max-w-2xl items-center gap-2 rounded-xl border border-slate-200 bg-white p-2 shadow-sm transition focus-within:border-brand-500 focus-within:ring-2 focus-within:ring-brand-500/15 lg:mx-0"
       >
         <Search className="ms-3 h-5 w-5 shrink-0 text-slate-400" />
         <input
@@ -32,7 +32,7 @@ export default function HomeSearch() {
         />
         <button
           type="submit"
-          className="btn-3d shrink-0 rounded-xl bg-brand-600 px-6 py-2.5 text-sm font-black text-white"
+          className="shrink-0 rounded-lg bg-brand-600 px-6 py-2.5 text-sm font-extrabold text-white shadow-sm transition hover:bg-brand-700"
         >
           بحث
         </button>

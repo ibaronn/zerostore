@@ -209,16 +209,18 @@ function SectionHead({
   return (
     <div className="mb-6 flex items-end justify-between gap-4">
       <div>
-        <div className="flex items-center gap-2 text-brand-600">{icon}</div>
-        <h2 className="font-cairo mt-2 text-2xl font-black text-slate-900 sm:text-3xl">{title}</h2>
-        <p className="mt-1 text-sm font-bold text-slate-500">{sub}</p>
-        <span className="mt-3 block h-1 w-14 rounded-full bg-gradient-to-r from-brand-500 via-teal-400 to-emerald-400" />
+        <div className="flex items-center gap-2.5">
+          <span className="grid h-10 w-10 place-items-center rounded-xl bg-brand-50 text-brand-700">{icon}</span>
+          <h2 className="font-cairo text-2xl font-extrabold text-slate-900 sm:text-3xl">{title}</h2>
+        </div>
+        <p className="mt-1.5 text-sm font-medium text-slate-500">{sub}</p>
+        <span className="mt-3 block h-1 w-12 rounded-full bg-brand-600" />
       </div>
       <Link
         href={href}
-        className="group hidden shrink-0 items-center gap-1 rounded-xl bg-slate-100 px-4 py-2 text-sm font-black text-slate-700 transition hover:bg-brand-600 hover:text-white sm:flex"
+        className="group hidden shrink-0 items-center gap-1.5 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-bold text-slate-600 transition hover:border-brand-300 hover:text-brand-700 sm:flex"
       >
-        عرض الكل <ChevronLeft className="h-4 w-4 transition-transform duration-300 group-hover:-translate-x-1" />
+        عرض الكل <ChevronLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
       </Link>
     </div>
   );
@@ -259,7 +261,7 @@ function HowItWorks() {
         <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">
           <Sparkles className="h-6 w-6" />
         </span>
-        <h2 className="font-cairo mt-4 text-3xl font-black text-slate-900">كيف يعمل زيرو ستور؟</h2>
+        <h2 className="font-cairo mt-4 text-3xl font-extrabold text-slate-900">كيف يعمل زيرو ستور؟</h2>
         <p className="mx-auto mt-2 max-w-xl text-sm font-bold text-slate-500">
           ثلاث خطوات بسيطة تفصلك عن تحقيق أول صفقة
         </p>
@@ -267,15 +269,15 @@ function HowItWorks() {
       <div className="mt-12 grid gap-6 md:grid-cols-3">
         {STEPS.map((s, i) => (
           <Reveal key={s.title} delay={i * 0.06}>
-            <div className="group relative h-full overflow-hidden rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-900/5">
-              <span className="font-cairo bg-gradient-to-br from-brand-200 via-teal-200 to-amber-100 bg-clip-text absolute -left-2 -top-4 text-8xl font-black text-transparent transition duration-300 group-hover:from-brand-300 group-hover:to-emerald-200">
+            <div className="group relative h-full overflow-hidden rounded-xl border border-slate-200 bg-white p-6 transition duration-300 hover:border-brand-200 hover:shadow-md hover:shadow-brand-900/5">
+              <span className="font-cairo absolute left-4 top-4 grid h-8 w-8 place-items-center rounded-full bg-slate-100 text-sm font-extrabold text-slate-500">
                 {i + 1}
               </span>
-              <div className="relative grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand-600 to-brand-700 text-white shadow-sm">
+              <div className="relative grid h-12 w-12 place-items-center rounded-xl bg-brand-600 text-white shadow-sm">
                 {s.icon}
               </div>
               <h3 className="font-cairo relative mt-5 text-lg font-extrabold text-slate-900">{s.title}</h3>
-              <p className="relative mt-2 text-sm font-bold leading-7 text-slate-500">{s.desc}</p>
+              <p className="relative mt-2 text-sm font-medium leading-7 text-slate-500">{s.desc}</p>
             </div>
           </Reveal>
         ))}
@@ -289,10 +291,10 @@ function PromoVideo() {
     <section className="mx-auto max-w-7xl px-4 py-14 lg:px-6">
       <Reveal>
         <div className="text-center">
-          <span className="mx-auto grid h-12 w-12 place-items-center rounded-2xl bg-brand-50 text-brand-600">
+          <span className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-brand-50 text-brand-700">
             <PlayCircle className="h-6 w-6" />
           </span>
-          <h2 className="font-cairo mt-4 text-3xl font-black text-slate-900">شاهد قصة زيرو ستور 🎬</h2>
+          <h2 className="font-cairo mt-4 text-3xl font-extrabold text-slate-900">شاهد قصة زيرو ستور</h2>
           <p className="mx-auto mt-2 max-w-xl text-sm font-bold text-slate-500">
             دقيقة واحدة — اعرض، تفاوض، واربح في أول سوق ليبي مفتوح بلا عمولة
           </p>
@@ -322,24 +324,24 @@ function CTABanner() {
   return (
     <section className="mx-auto max-w-7xl px-4 pb-20 lg:px-6">
       <Reveal>
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-gradient-to-l from-brand-800 via-brand-700 to-brand-500 px-6 py-16 text-center text-white shadow-2xl shadow-brand-900/20 sm:px-16">
-          <div className="pointer-events-none absolute -top-20 right-1/3 h-60 w-60 rounded-full bg-white/15 blur-3xl" />
+        <div className="relative overflow-hidden rounded-2xl bg-gradient-to-l from-brand-800 via-brand-700 to-brand-600 px-6 py-16 text-center text-white shadow-xl shadow-brand-900/20 sm:px-16">
+          <div className="pointer-events-none absolute -end-20 -top-20 h-60 w-60 rounded-full bg-white/10 blur-3xl" />
           <div className="relative">
-            <h2 className="font-cairo text-3xl font-black sm:text-4xl">جاهز تبيع في ليبيا؟ ابدأ الآن 🇱🇾</h2>
-            <p className="mx-auto mt-4 max-w-xl text-sm font-bold leading-8 text-white/80 sm:text-base">
+            <h2 className="font-cairo text-3xl font-extrabold sm:text-4xl">جاهز تبيع في ليبيا؟ ابدأ الآن 🇱🇾</h2>
+            <p className="mx-auto mt-4 max-w-xl text-sm font-medium leading-8 text-white/80 sm:text-base">
               أنشئ حسابك على زيرو ستور، جهّز متجرك، وانشر أول إعلان بالدينار من أي مدينة — كله مجاني وبدون عمولة.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
               <Link
                 href="/post"
-                className="btn-3d flex items-center gap-2 rounded-2xl bg-white px-8 py-4 text-base font-black text-brand-700 shadow-lg transition hover:bg-brand-50"
+                className="flex items-center gap-2 rounded-xl bg-white px-8 py-4 text-base font-extrabold text-brand-700 shadow-lg transition hover:bg-brand-50"
               >
                 <ArrowLeft className="h-5 w-5" />
                 أنشئ حسابك وابدأ
               </Link>
               <Link
                 href="/listings"
-                className="glass flex items-center gap-2 rounded-2xl px-8 py-4 text-base font-black text-white transition hover:bg-white/15"
+                className="flex items-center gap-2 rounded-xl border border-white/30 bg-white/10 px-8 py-4 text-base font-extrabold text-white backdrop-blur transition hover:bg-white/20"
               >
                 <ShoppingBag className="h-5 w-5" />
                 تسوّق من كل ليبيا
