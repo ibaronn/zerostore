@@ -123,7 +123,7 @@ export default async function HomePage() {
     <>
       <Hero showcase={showcase} count={latest.length} />
 
-      <section className="relative mx-auto -mt-8 max-w-7xl px-4 py-8 lg:px-6">
+      <section className="mx-auto max-w-7xl px-4 py-10 lg:px-6">
         <Reveal>
           <SectionHead
             icon={<Store className="h-6 w-6" />}

@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import Link from "next/link";
 import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
-import { ShoppingBag, MessageCircle, Phone, Wallet, Users, ShieldCheck, BadgeCheck } from "lucide-react";
+import { MessageCircle, Phone, Wallet, BadgeCheck } from "lucide-react";
 import HomeSearch from "@/components/home-search";
 
 type HeroItem = {
@@ -18,50 +18,59 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 22, mass: 0.4 });
 
-  const titleY = useTransform(progress, [0, 1], [0, reduced ? 0 : 110]);
-  const titleOpacity = useTransform(progress, [0, 0.65], [1, 0]);
-  const gridY = useTransform(progress, [0, 1], [0, reduced ? 0 : -70]);
-  const gridRotate = useTransform(progress, [0, 1], [0, reduced ? 0 : 4]);
+  const titleY = useTransform(progress, [0, 1], [0, reduced ? 0 : 80]);
+  const titleOpacity = useTransform(progress, [0, 0.6], [1, 0]);
+  const gridY = useTransform(progress, [0, 1], [0, reduced ? 0 : -50]);
 
-  const [a, b, c] = [
+  const [a, b] = [
     showcase[0]?.images[0],
     showcase[1]?.images[0] ?? showcase[0]?.images[1],
-    showcase[2]?.images[0],
   ];
 
   return (
-    <section ref={ref} className="relative overflow-hidden bg-white text-slate-900">
+    <section ref={ref} className="relative overflow-hidden bg-slate-950 text-white">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5]" />
-        <div className="absolute -end-28 -top-28 h-[26rem] w-[26rem] rounded-full bg-brand-100/60 blur-3xl" />
-        <div className="absolute -start-32 bottom-0 h-80 w-80 rounded-full bg-teal-100/50 blur-3xl" />
+        <video
+          src="/video/zero-promo.mp4"
+          autoPlay
+          loop
+          muted
+          playsInline
+          preload="auto"
+          className="h-full w-full object-cover opacity-40"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-slate-950/95 via-slate-950/85 to-slate-950/55" />
+        <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-slate-950 to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 lg:grid-cols-2 lg:pb-20 lg:pt-16">
+      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-14 pt-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-14 lg:pb-20 lg:pt-20">
         <motion.div style={{ y: titleY, opacity: titleOpacity }} className="text-center lg:text-start">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-bold text-brand-700 shadow-sm">
-            <BadgeCheck className="h-4 w-4 text-brand-600" />
-            أول سوق ليبي مفتوح 🇱🇾 — بلا عمولة نهائياً
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-1.5 text-xs font-bold text-white/85 backdrop-blur">
+            <BadgeCheck className="h-4 w-4 text-teal-300" />
+            أول سوق ليبي مفتوح — بلا عمولة نهائياً 🇱🇾
           </span>
 
-          <h1 className="font-cairo mt-5 text-4xl font-black leading-[1.15] sm:text-5xl">
-            اعرض منتجك، <span className="text-gradient">تفاوض</span> واربح أسرع
+          <h1 className="font-cairo mt-6 text-[2.6rem] font-black leading-[1.08] tracking-tight sm:text-6xl lg:text-[4.1rem]">
+            اعرض منتجك، تفاوض، <span className="text-teal-300">واربح أسرع</span>
           </h1>
 
-          <p className="mx-auto mt-4 max-w-xl text-base font-medium leading-8 text-slate-500 sm:text-lg lg:mx-0">
+          <p className="mx-auto mt-5 max-w-xl text-base font-medium leading-8 text-white/60 sm:text-lg lg:mx-0">
             زيرو ستور يمنحك متجراً رقمياً من قلب ليبيا — اعرض منتجك من أي مدينة،
             سعّر بالدينار الليبي، وتفاوض مع المشترين عبر دردشة فورية.
           </p>
 
-          <div className="mt-7">
+          <div className="mt-8">
             <HomeSearch />
           </div>
 
-          <div className="mt-9 grid max-w-md grid-cols-3 gap-3 text-center max-lg:mx-auto lg:max-w-none lg:text-start">
-            <MiniStat icon={<Wallet className="h-5 w-5 text-emerald-600" />} value="0 د.ل" label="عمولة البيع" />
-            <MiniStat icon={<MessageCircle className="h-5 w-5 text-brand-600" />} value="دردشة" label="تفاوض فوري" />
-            <MiniStat icon={<Phone className="h-5 w-5 text-brand-700" />} value="+218" label="رقمك في متجرك" />
+          <div className="mt-10 grid max-w-md grid-cols-3 gap-4 text-center max-lg:mx-auto lg:max-w-none lg:text-start">
+            <MiniStat icon={<Wallet className="h-5 w-5 text-teal-300" />} value="0 د.ل" label="عمولة البيع" />
+            <MiniStat icon={<MessageCircle className="h-5 w-5 text-teal-300" />} value="دردشة" label="تفاوض فوري" />
+            <MiniStat icon={<Phone className="h-5 w-5 text-teal-300" />} value="+218" label="رقمك في متجرك" />
           </div>
+          <p className="mt-4 text-xs font-medium text-white/40 lg:mt-5">
+            {count}+ إعلان نشط في السوق الآن • من كل المدن الليبية
+          </p>
 
           {showcase.some((s) => s.images[0]) && (
             <div className="mt-8 flex gap-3 overflow-x-auto pb-1 lg:hidden [scrollbar-width:none]">
@@ -71,15 +80,16 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
                     <Link
                       key={s.id}
                       href={`/listings/${s.id}`}
-                      className="group relative shrink-0 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm ring-1 ring-black/5"
+                      className="group relative shrink-0 overflow-hidden rounded-xl border border-white/10 bg-white shadow-md ring-1 ring-black/5"
                     >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={s.images[0]}
                         alt=""
                         loading="lazy"
                         className="aspect-[4/5] w-24 object-cover transition duration-300 group-hover:scale-105"
                       />
-                      <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-slate-900/70 px-1.5 py-0.5 font-cairo text-xs font-bold text-white backdrop-blur">
+                      <span className="absolute bottom-1.5 start-1.5 rounded-lg bg-slate-900/80 px-1.5 py-0.5 font-cairo text-xs font-bold text-white backdrop-blur">
                         {formatNum(s.price)} د.ل
                       </span>
                     </Link>
@@ -89,87 +99,47 @@ export default function Hero({ showcase, count }: { showcase: HeroItem[]; count:
           )}
         </motion.div>
 
-        <motion.div style={{ y: gridY, rotate: gridRotate }} className="relative mx-auto hidden w-full max-w-lg lg:block">
-          <motion.div
-            initial={{ opacity: 0, y: 46 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1], delay: 0.15 }}
-            className="grid grid-cols-2 gap-4"
-          >
-            <div className="space-y-4 pt-10">
-              <ShowcaseTile src={a} className="aspect-[4/5] rounded-2xl" price={showcase[0]?.price} />
-              {c && <ShowcaseTile src={c} className="aspect-[4/3] rounded-2xl" price={showcase[2]?.price} />}
+        <motion.div style={{ y: gridY }} className="relative mx-auto hidden h-[30rem] w-full max-w-md lg:block">
+          <div className="absolute start-6 top-0 w-60 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40">
+            {a ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={a} alt="" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            ) : (
+              <Placeholder />
+            )}
+          </div>
+
+          <div className="absolute bottom-0 end-4 w-64 overflow-hidden rounded-2xl border border-white/10 bg-white shadow-2xl shadow-black/40">
+            {b ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={b} alt="" loading="lazy" className="aspect-[4/5] w-full object-cover" />
+            ) : (
+              <Placeholder />
+            )}
+            <div className="flex items-center justify-between border-t border-slate-100 px-3.5 py-3">
+              <span className="font-cairo text-sm font-extrabold text-slate-900">
+                {showcase[1]?.price !== undefined ? `${formatNum(showcase[1].price)} د.ل` : "زيرو ستور"}
+              </span>
+              <span className="rounded-full bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-700">
+                متاح الآن
+              </span>
             </div>
-            <div className="mt-6 space-y-4">
-              <ShowcaseTile src={b} className="aspect-[3/4] rounded-2xl" price={showcase[1]?.price} />
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
-                  <Users className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-cairo text-sm font-black text-slate-900">
-                    {count}+ إعلان نشط في السوق
-                  </p>
-                  <p className="text-xs font-bold text-slate-500">من كل المدن الليبية</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-brand-50 text-brand-700">
-                  <Users className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-cairo text-sm font-extrabold text-slate-900">
-                    {count}+ إعلان نشط في السوق
-                  </p>
-                  <p className="text-xs font-medium text-slate-500">من كل المدن الليبية</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 rounded-xl border border-slate-200 bg-white px-4 py-3 shadow-sm">
-                <span className="grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-emerald-50 text-emerald-600">
-                  <ShieldCheck className="h-5 w-5" />
-                </span>
-                <div>
-                  <p className="font-cairo text-sm font-extrabold text-slate-900">بائع معتمد</p>
-                  <p className="text-xs font-medium text-slate-500">رقم هاتف +218 في المتجر</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
+          </div>
+
+          <div className="absolute -end-2 top-12 flex items-center gap-1.5 rounded-full bg-amber-400 px-3.5 py-2 text-xs font-extrabold text-slate-900 shadow-lg shadow-amber-500/30">
+            <Wallet className="h-4 w-4" />
+            صفر عمولة
+          </div>
         </motion.div>
       </div>
     </section>
   );
 }
 
-function ShowcaseTile({
-  src,
-  className,
-  price,
-}: {
-  src?: string;
-  className: string;
-  price?: number;
-}) {
+function Placeholder() {
   return (
-    <div className={`group relative overflow-hidden ${className} border border-white/60 bg-white shadow-xl shadow-brand-900/10 ring-1 ring-black/5`}>
-      {src ? (
-        <img
-          src={src}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-      ) : (
-        <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand-600 to-brand-800">
-          <ShoppingBag className="h-10 w-10 text-white/60" />
-        </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-      {price !== undefined && (
-        <span className="absolute bottom-3 start-3 rounded-xl bg-slate-900/70 px-3 py-1.5 font-cairo text-sm font-extrabold text-white backdrop-blur">
-          {formatNum(price)} د.ل
-        </span>
-      )}
+    <div className="grid aspect-[4/5] w-full place-items-center bg-slate-800 text-xs font-bold text-slate-400">
+      ZERO STORE
     </div>
   );
 }
@@ -178,8 +148,8 @@ function MiniStat({ icon, value, label }: { icon: React.ReactNode; value: string
   return (
     <div className="flex flex-col items-center gap-1 lg:items-start">
       {icon}
-      <p className="font-cairo text-lg font-extrabold text-slate-900">{value}</p>
-      <p className="text-[11px] font-semibold text-slate-500">{label}</p>
+      <p className="font-cairo text-lg font-extrabold text-white">{value}</p>
+      <p className="text-[11px] font-medium text-white/55">{label}</p>
     </div>
   );
 }
