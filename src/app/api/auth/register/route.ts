@@ -4,29 +4,49 @@ import { z } from "zod";
 import { prisma } from "@/lib/prisma";
 import { signToken, setAuthCookie } from "@/lib/auth";
 import { publicUser } from "@/lib/serialize";
+import { normalizeLibyanPhone, VALID_PHONE } from "@/lib/phone";
+import { verifyVerifiedPhone } from "@/lib/otp";
 
 const schema = z.object({
   name: z.string().min(2).max(60),
   email: z.string().email(),
-  phone: z.string().max(20).optional().or(z.literal("")),
+  phone: z.string().min(6).max(20),
   password: z.string().min(6).max(72),
+  verifiedToken: z.string().min(10),
 });
 
 export async function POST(req: NextRequest) {
   try {
     const body = schema.parse(await req.json());
-    const exists = await prisma.user.findUnique({
-      where: { email: body.email.toLowerCase() },
-    });
-    if (exists) {
+    const phone = normalizeLibyanPhone(body.phone);
+    if (!VALID_PHONE.test(phone)) {
+      return NextResponse.json({ error: "رقم الهاتف غير صحيح" }, { status: 400 });
+    }
+
+    const verifiedPhone = await verifyVerifiedPhone(body.verifiedToken);
+    if (!verifiedPhone || verifiedPhone !== phone) {
+      return NextResponse.json(
+        { error: "لم يتم توثيق رقم الهاتف — أعد التحقق عبر رسالة التفعيل" },
+        { status: 403 }
+      );
+    }
+
+    const email = body.email.toLowerCase();
+    const existsEmail = await prisma.user.findUnique({ where: { email } });
+    if (existsEmail) {
       return NextResponse.json({ error: "البريد الإلكتروني مستخدم من قبل" }, { status: 409 });
     }
+    const existsPhone = await prisma.user.findUnique({ where: { phone } });
+    if (existsPhone) {
+      return NextResponse.json({ error: "رقم الهاتف مستخدم من قبل" }, { status: 409 });
+    }
+
     const passwordHash = await bcrypt.hash(body.password, 10);
     const user = await prisma.user.create({
       data: {
         name: body.name,
-        email: body.email.toLowerCase(),
-        phone: body.phone || null,
+        email,
+        phone,
         passwordHash,
         storeName: body.name,
       },

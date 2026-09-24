@@ -3,15 +3,10 @@ import {
   ShoppingBag,
   PlusCircle,
   MessageCircle,
-  Phone,
-  Wallet,
-  ShieldCheck,
   Store,
-  BadgeCheck,
   Rocket,
   Users,
   ChevronLeft,
-  MapPin,
   PlayCircle,
   Sparkles,
   ArrowLeft,
@@ -22,9 +17,9 @@ import type { ListingCardData } from "@/components/listing-card";
 import ListingCard from "@/components/listing-card";
 import CategoriesGrid from "@/components/categories-grid";
 import StatsBand from "@/components/stats-band";
-import HomeSearch from "@/components/home-search";
 import Reveal from "@/components/reveal";
 import AdMarquee, { type MarqueeListing } from "@/components/ad-marquee";
+import Hero from "@/components/hero";
 
 export const metadata = {
   title: "ZERO STORE | سوق ليبيا المفتوح — اعرض، تفاوض، واربح",
@@ -196,125 +191,6 @@ export default async function HomePage() {
       <CTABanner />
     </>
   );
-}
-
-function Hero({ showcase, count }: { showcase: CardLite[]; count: number }) {
-  return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-brand-50 via-[#f4f8f6] to-[#f4f6f5] text-slate-900">
-      <div className="pointer-events-none absolute -top-24 start-1/4 h-80 w-80 rounded-full bg-brand-200/40 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-24 end-8 h-72 w-72 rounded-full bg-teal-300/30 blur-3xl" />
-
-      <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 lg:grid-cols-2 lg:pb-20 lg:pt-16">
-        <div className="text-center lg:text-start">
-          <span className="inline-flex items-center gap-2 rounded-full border border-brand-200 bg-white/80 px-4 py-1.5 text-xs font-bold text-brand-700 shadow-sm">
-            <BadgeCheck className="h-4 w-4 text-brand-600" />
-            أول سوق ليبي مفتوح 🇱🇾 — بلا عمولة نهائياً
-          </span>
-
-          <h1 className="font-cairo mt-5 text-4xl font-black leading-[1.15] sm:text-5xl">
-            اعرض منتجك، <span className="text-gradient">تفاوض</span> واربح أسرع
-          </h1>
-
-          <p className="mx-auto mt-4 max-w-xl text-base font-bold leading-8 text-slate-500 sm:text-lg lg:mx-0">
-            زيرو ستور يمنحك متجراً رقمياً من قلب ليبيا — اعرض منتجك من أي مدينة،
-            سعّر بالدينار الليبي، وتفاوض مع المشترين عبر دردشة فورية.
-          </p>
-
-          <div className="mt-7">
-            <HomeSearch />
-          </div>
-
-          <div className="mt-9 grid max-w-md grid-cols-3 gap-3 text-center max-lg:mx-auto lg:max-w-none lg:text-start">
-            <MiniStat icon={<Wallet className="h-5 w-5 text-emerald-600" />} value="0 د.ل" label="عمولة البيع" />
-            <MiniStat icon={<MessageCircle className="h-5 w-5 text-brand-600" />} value="دردشة" label="تفاوض فوري" />
-            <MiniStat icon={<Phone className="h-5 w-5 text-brand-700" />} value="+218" label="رقمك في متجرك" />
-          </div>
-        </div>
-
-        <ShowcaseCol items={showcase} count={count} />
-      </div>
-    </section>
-  );
-}
-
-function ShowcaseCol({ items, count }: { items: CardLite[]; count: number }) {
-  const [a, b, c] = [
-    items[0]?.images[0],
-    items[1]?.images[0] ?? items[0]?.images[1],
-    items[2]?.images[0],
-  ];
-
-  return (
-    <div className="relative mx-auto hidden w-full max-w-lg lg:block">
-      <div className="grid grid-cols-2 gap-4">
-        <div className="space-y-4 pt-10">
-          <ShowcaseTile src={a} className="aspect-[4/5] rounded-3xl" price={items[0]?.price} />
-          {c && <ShowcaseTile src={c} className="aspect-[4/3] rounded-3xl" price={items[2]?.price} />}
-        </div>
-        <div className="mt-6 space-y-4">
-          <ShowcaseTile src={b} className="aspect-[3/4] rounded-3xl" price={items[1]?.price} />
-          <div className="flex items-center gap-3 rounded-2xl border border-brand-100 bg-white/90 px-4 py-3 shadow-lg shadow-brand-900/5">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-700">
-              <Users className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-cairo text-sm font-black text-slate-900">
-                {count}+ إعلان نشط في السوق
-              </p>
-              <p className="text-xs font-bold text-slate-500">من كل المدن الليبية</p>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 rounded-2xl border border-emerald-100 bg-white/90 px-4 py-3 shadow-lg shadow-brand-900/5">
-            <span className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-emerald-50 text-emerald-600">
-              <ShieldCheck className="h-5 w-5" />
-            </span>
-            <div>
-              <p className="font-cairo text-sm font-black text-slate-900">بائع معتمد</p>
-              <p className="text-xs font-bold text-slate-500">رقم هاتف +218 في المتجر</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
-}
-
-function ShowcaseTile({
-  src,
-  className,
-  price,
-}: {
-  src?: string;
-  className: string;
-  price?: number;
-}) {
-  return (
-    <div className={`group relative overflow-hidden ${className} border border-white/60 bg-white shadow-xl shadow-brand-900/10`}>
-      {src ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
-          src={src}
-          alt=""
-          loading="lazy"
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-        />
-      ) : (
-        <div className="grid h-full w-full place-items-center bg-gradient-to-br from-brand-600 to-brand-800">
-          <ShoppingBag className="h-10 w-10 text-white/60" />
-        </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/30 via-transparent to-transparent opacity-0 transition duration-300 group-hover:opacity-100" />
-      {price !== undefined && (
-        <span className="absolute bottom-3 start-3 rounded-xl bg-ink/70 px-3 py-1.5 font-cairo text-sm font-black text-white backdrop-blur">
-          {formatNum(price)} د.ل
-        </span>
-      )}
-    </div>
-  );
-}
-
-function formatNum(n: number) {
-  return Math.round(n).toLocaleString("en-US");
 }
 
 function SectionHead({

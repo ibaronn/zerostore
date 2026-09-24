@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { motion, useMotionTemplate, useMotionValue, useSpring } from "framer-motion";
 import { Heart, MapPin, Eye, BadgeCheck, ImageOff } from "lucide-react";
 import { money, timeAgo } from "@/lib/format";
 import { categoryBySlug, conditionLabel } from "@/lib/categories";
@@ -36,6 +37,31 @@ export default function ListingCard({
   const [pending, setPending] = useState(false);
   const router = useRouter();
 
+  const rx = useMotionValue(0);
+  const ry = useMotionValue(0);
+  const mx = useMotionValue(50);
+  const my = useMotionValue(50);
+  const rotateX = useSpring(rx, { stiffness: 200, damping: 22 });
+  const rotateY = useSpring(ry, { stiffness: 200, damping: 22 });
+  const glow = useMotionTemplate`radial-gradient(260px circle at ${mx}% ${my}%, rgba(99,102,241,0.18), transparent 70%)`;
+
+  const onMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const px = (e.clientX - rect.left) / rect.width;
+    const py = (e.clientY - rect.top) / rect.height;
+    ry.set((px - 0.5) * 7);
+    rx.set((0.5 - py) * 7);
+    mx.set(px * 100);
+    my.set(py * 100);
+  };
+
+  const onLeave = () => {
+    rx.set(0);
+    ry.set(0);
+    mx.set(50);
+    my.set(50);
+  };
+
   const img = firstImage(listing.images);
   const cat = categoryBySlug(listing.category);
 
@@ -64,8 +90,17 @@ export default function ListingCard({
   };
 
   return (
-    <div className="group flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg hover:shadow-brand-900/10">
-      <Link href={`/listings/${listing.id}`} className="flex flex-1 flex-col">
+    <motion.div
+      className="group h-full"
+      style={{ rotateX, rotateY, transformPerspective: 900 }}
+      onMouseMove={onMove}
+      onMouseLeave={onLeave}
+    >
+      <Link
+        href={`/listings/${listing.id}`}
+        className="relative flex h-full flex-col overflow-hidden rounded-2xl border border-slate-200/80 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-200 hover:shadow-lg hover:shadow-brand-900/10"
+      >
+        <motion.div className="pointer-events-none absolute inset-0 z-[1] opacity-0 transition duration-300 group-hover:opacity-100" style={{ background: glow }} />
         <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
           {img && !imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
@@ -145,6 +180,6 @@ export default function ListingCard({
           <p className="text-[11px] font-bold text-slate-400">{timeAgo(listing.createdAt)}</p>
         </div>
       </Link>
-    </div>
+    </motion.div>
   );
 }

@@ -13,13 +13,14 @@ export default function CategoriesGrid() {
             className="group flex shrink-0 flex-col items-center gap-2.5 rounded-2xl border border-slate-200/80 bg-white px-2 py-4 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-lg hover:shadow-brand-900/10"
           >
             <span
-              className={`grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br ${c.gradient} text-white shadow-sm transition duration-300 group-hover:scale-110`}
+              className={`grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br ${c.gradient} text-white shadow-sm transition duration-300 group-hover:-rotate-6 group-hover:scale-110 group-hover:shadow-md`}
             >
               <Icon className="h-5 w-5" />
             </span>
             <span className="text-xs font-extrabold leading-4 text-slate-700 transition group-hover:text-brand-700">
               {c.name}
             </span>
+            <span className="h-1 w-6 origin-center scale-x-[0.35] rounded-full bg-brand-500/60 transition-transform duration-300 group-hover:scale-x-100 group-hover:bg-brand-600" />
           </Link>
         );
       })}

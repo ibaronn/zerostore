@@ -3,6 +3,7 @@ import "./globals.css";
 import Navbar from "@/components/navbar";
 import Footer from "@/components/footer";
 import WelcomeToast from "@/components/welcome-toast";
+import ScrollProgress from "@/components/scroll-progress";
 
 export const metadata: Metadata = {
   title: "ZERO STORE | سوق ليبيا المفتوح",
@@ -26,6 +27,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen font-body text-slate-900 antialiased">
+        <ScrollProgress />
         <Navbar />
         <main>{children}</main>
         <Footer />
