@@ -1,0 +1,94 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String    @id @default(cuid())
+  name         String
+  email        String    @unique
+  passwordHash String
+  phone        String?
+  city         String?
+  bio          String?
+  storeName    String?
+  avatar       String?
+  banner       String?
+  role         String    @default("USER")
+  listings     Listing[]
+  sentMessages Message[]
+  chatsAsBuyer Chat[]    @relation("buyer")
+  chatsAsSeller Chat[]   @relation("seller")
+  favorites    Favorite[]
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+}
+
+model Listing {
+  id          String     @id @default(cuid())
+  slug        String     @unique
+  title       String
+  description String
+  price       Float
+  negotiable  Boolean    @default(true)
+  condition   String     @default("used")
+  category    String
+  city        String
+  images      String     @default("")
+  featured    Boolean    @default(false)
+  status      String     @default("active")
+  views       Int        @default(0)
+  userId      String
+  user        User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  chats       Chat[]
+  favorites   Favorite[]
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+
+  @@index([category])
+  @@index([status])
+  @@index([userId])
+}
+
+model Chat {
+  id        String    @id @default(cuid())
+  listingId String
+  listing   Listing   @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  buyerId   String
+  buyer     User      @relation("buyer", fields: [buyerId], references: [id], onDelete: Cascade)
+  sellerId  String
+  seller    User      @relation("seller", fields: [sellerId], references: [id], onDelete: Cascade)
+  messages  Message[]
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+
+  @@unique([listingId, buyerId])
+}
+
+model Message {
+  id        String   @id @default(cuid())
+  chatId    String
+  chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade)
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+  text      String
+  readAt    DateTime?
+  createdAt DateTime @default(now())
+
+  @@index([chatId])
+}
+
+model Favorite {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  listingId String
+  listing   Listing  @relation(fields: [listingId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@unique([userId, listingId])
+}

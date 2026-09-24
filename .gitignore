@@ -1,0 +1,32 @@
+node_modules
+.next
+out
+*.log
+.env
+*.tsbuildinfo
+
+# prisma (sqlite dev artifacts)
+prisma/dev.db
+prisma/dev.db-journal
+prisma/migrations/dev/
+
+# uploaded images (local only — replaced by external storage on prod)
+public/uploads/*
+!public/uploads/.gitkeep
+
+# backup / migration-fix scratch (not part of the app)
+.bak-before-moji-fix/
+.moji-backup/
+.moji-stage/
+.moji-verify/
+.src-backup/
+.fixed-layout.tsx
+.layout.fullfixed.tsx
+FIX_MOJI_REPORT.txt
+
+# internal scripting scratch
+scripts/
+
+.DS_Store
+# separate remotion scratch project (not part of the app)
+video/
